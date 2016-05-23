@@ -12,7 +12,6 @@ public class Loader {
         Image imageBigDamage = new Image(Loader.class.getResourceAsStream("bigdamage.jpg"));
         Image imageAttackMagic = new Image(Loader.class.getResourceAsStream("attackMagic.png"));
 
-
         //Item
         Image imageItem = new Image(Loader.class.getResourceAsStream("item.png"));
 
@@ -26,10 +25,16 @@ public class Loader {
 
         if (imageName.equalsIgnoreCase("attack")){
             return new ImageView(imageAttackMelee);
-        } else{
+        } if else(imageName.equalsIgnoreCase(""))
+
+
+
+        else{
             return new ImageView(imageAttackMagic);
         }
     }
 
-    public static Label LabelLoader(String labelName)
+    public static Label LabelLoader(String labelName){
+
+    }
 }

@@ -9,8 +9,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -39,34 +37,7 @@ public class Main extends Application{
         GridPane coreGridPane = new GridPane();//Core GridPane
         GridPane attackGrid = new GridPane();//Attack GridPane
         GridPane buttonGrid = new GridPane();//Button Field GridPane
-
-        //Image Loading Start
-
-        //Attack
-//        ImageView imageAttackMelee = new ImageView(new Image(getClass().getResourceAsStream("attackMelee.png")));
-//        imageAttackMelee.setFitWidth(64);
-//        imageAttackMelee.setFitHeight(64);
-        ImageView imageBigDamage = new ImageView(new Image(getClass().getResourceAsStream("bigdamage.jpg")));
-        ImageView imageAttackMagic = new ImageView(new Image(getClass().getResourceAsStream("attackMagic.png")));
-        imageAttackMagic.setFitWidth(64);
-        imageAttackMagic.setFitHeight(64);
-
-        //Item
-        ImageView imageItem = new ImageView(new Image(getClass().getResourceAsStream("item.png")));
-        imageItem.setFitWidth(64);
-        imageItem.setFitHeight(64);
-
-        //Run
-        ImageView imageRun = new ImageView(new Image(getClass().getResourceAsStream("run.png")));
-        imageRun.setFitWidth(64);
-        imageRun.setFitHeight(64);
-        ImageView imageRunAway = new ImageView(new Image(getClass().getResourceAsStream("runaway.jpg")));
-
-        //Player
-        ImageView playerOne = new ImageView(new Image(getClass().getResourceAsStream("playerone.jpg")));
-        ImageView playerTwo = new ImageView(new Image(getClass().getResourceAsStream("playertwo.jpg")));
-
-        //Image Loading End
+        
 
         //Labels
         Label playerOneSprite = new Label();
@@ -87,7 +58,7 @@ public class Main extends Application{
         //Button Configs Start
 
         //Attack Button
-        attack.setGraphic(ImageLoader.ImageLoader("attack"));//Set Button Image
+        attack.setGraphic(Loader.ImageLoader("attack"));//Set Button Image
         attack.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button Formatting
         attack.setOnAction(e -> {
                     coreGridPane.getChildren().remove(battlePrompt);
@@ -106,7 +77,7 @@ public class Main extends Application{
         );//Lambda Action
 
         //Attack Melee
-        attackMelee.setGraphic(ImageLoader.ImageLoader("attack"));
+        attackMelee.setGraphic(Loader.ImageLoader("attack"));
         attackMelee.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");
 
         //Attack Magic

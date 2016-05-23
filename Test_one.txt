@@ -1,2 +1,6 @@
 Jonathan Luu
+<<<<<<< HEAD
 Adam Salami
+=======
+Christopher Gist Farquhar
+>>>>>>> origin/master

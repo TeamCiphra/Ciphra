@@ -8,8 +8,8 @@ APCS Team Ciphra
 
 ##Something else
 
-##You get the point
-
 ##Some more stuff
+
+##You get the point
 
 ##MOAR MEMES

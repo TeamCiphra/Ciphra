@@ -1,17 +1,8 @@
 # Ciphra
 
-APCS Team Ciphra
+##Week One
+Already Done
+##Week Two
+Branch Split into Battle Mechanics and Layout
 
-##Game
 
-##Something
-
-##Something else
-
-##You get the point
-
-##Some more stuff
-
-##MOAR MEMES
-
-Jonathan Luu

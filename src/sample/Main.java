@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -66,6 +67,7 @@ public class Main extends Application{
                     coreGridPane.getChildren().remove(buttonGrid);
                     Button goBack = new Button("Go back");
                     coreGridPane.add(goBack, 1, 1);
+                    coreGridPane.setHalignment(goBack, HPos.CENTER);
                     goBack.setOnAction(f -> {
                                 coreGridPane.getChildren().remove(attackGrid);
                                 coreGridPane.add(battlePrompt, 0, 1);
@@ -79,10 +81,12 @@ public class Main extends Application{
         //Attack Melee
         attackMelee.setGraphic(Loader.ImageLoader("attackmelee"));
         attackMelee.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");
+        attackMelee.setMaxSize(327,Double.MAX_VALUE);
 
         //Attack Magic
         attackMagic.setGraphic(Loader.ImageLoader("attackmagic"));
         attackMagic.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");
+        attackMagic.setMaxSize(327, Double.MAX_VALUE);
 
         //Item Button
         item.setGraphic(Loader.ImageLoader("item"));//Set Button Image
@@ -98,15 +102,20 @@ public class Main extends Application{
 
         //GridPane Config Start
 
+        coreGridPane.setGridLinesVisible(true);
         //Main GP Formatting
-        coreGridPane.setVgap(10);
-        coreGridPane.setHgap(10);
+        coreGridPane.setVgap(5);
+        coreGridPane.setHgap(5);
         coreGridPane.setPadding(GLOBAL_INSET);
         coreGridPane.setAlignment(Pos.CENTER);
         //Main GP GP Placement
         coreGridPane.setConstraints(sceneBattle, 0, 0);
+        coreGridPane.setColumnSpan(sceneBattle, coreGridPane.REMAINING);
         coreGridPane.setConstraints(battlePrompt, 0, 1);
         coreGridPane.setConstraints(buttonGrid, 1, 1);
+        coreGridPane.getColumnConstraints().add(new ColumnConstraints(674));
+        coreGridPane.getColumnConstraints().add(new ColumnConstraints(170));
+
 
         //Add Elements
         coreGridPane.getChildren().addAll(sceneBattle, battlePrompt, buttonGrid);
@@ -115,7 +124,7 @@ public class Main extends Application{
         coreGridPane.setHalignment(buttonGrid, HPos.CENTER);
 
         //Battle Scene
-        sceneBattle.setHgap(10);
+        sceneBattle.setHgap(5);
         sceneBattle.setPadding(GLOBAL_INSET);
         sceneBattle.setConstraints(playerOneSprite, 0, 0);
         sceneBattle.setConstraints(playerOneWeapon, 1, 0);
@@ -131,7 +140,7 @@ public class Main extends Application{
 
         //Attack Action Grid
         attackGrid.setGridLinesVisible(true);
-        attackGrid.setHgap(10);
+        attackGrid.setHgap(5);
         attackGrid.setPadding(GLOBAL_INSET);
         attackGrid.setAlignment(Pos.CENTER);
         attackGrid.setConstraints(attackMelee, 0, 0);
@@ -143,7 +152,8 @@ public class Main extends Application{
 
 
         //Main Button Grid
-        buttonGrid.setHgap(10);
+        buttonGrid.setGridLinesVisible(true);
+        buttonGrid.setHgap(5);
         buttonGrid.setPadding(GLOBAL_INSET);
         buttonGrid.setAlignment(Pos.CENTER);
         buttonGrid.setConstraints(attack, 0, 0);
@@ -172,6 +182,7 @@ public class Main extends Application{
         items = new Scene(itemBag,854, 480);
 
         window.setScene(mainScene);//Make the window Scene
+        mainStage.setResizable(false);
         mainStage.show();//Show
     }
 

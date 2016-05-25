@@ -46,8 +46,4 @@ public class Loader {
             return new ImageView(imageNull);
         }
     }
-
-//    public static Label LabelLoader(String labelName){
-//
-//    }
 }

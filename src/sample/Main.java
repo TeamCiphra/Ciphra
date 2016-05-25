@@ -37,14 +37,14 @@ public class Main extends Application{
         GridPane coreGridPane = new GridPane();//Core GridPane
         GridPane attackGrid = new GridPane();//Attack GridPane
         GridPane buttonGrid = new GridPane();//Button Field GridPane
-        
+
 
         //Labels
         Label playerOneSprite = new Label();
-        playerOneSprite.setGraphic(playerOne);
+        playerOneSprite.setGraphic(Loader.ImageLoader("playerone"));
         Label playerOneWeapon = new Label("This is player One's weapon");
         Label playerTwoSprite = new Label();
-        playerTwoSprite.setGraphic(playerTwo);
+        playerTwoSprite.setGraphic(Loader.ImageLoader("playertwo"));
         Label playerTwoWeapon = new Label("This is player Two's weapon");
         Label battlePrompt = new Label("Please choose an option.");
 
@@ -58,7 +58,7 @@ public class Main extends Application{
         //Button Configs Start
 
         //Attack Button
-        attack.setGraphic(Loader.ImageLoader("attack"));//Set Button Image
+        attack.setGraphic(Loader.ImageLoader("attackmelee"));//Set Button Image
         attack.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button Formatting
         attack.setOnAction(e -> {
                     coreGridPane.getChildren().remove(battlePrompt);
@@ -77,22 +77,22 @@ public class Main extends Application{
         );//Lambda Action
 
         //Attack Melee
-        attackMelee.setGraphic(Loader.ImageLoader("attack"));
+        attackMelee.setGraphic(Loader.ImageLoader("attackmelee"));
         attackMelee.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");
 
         //Attack Magic
-        attackMagic.setGraphic(imageAttackMagic);
+        attackMagic.setGraphic(Loader.ImageLoader("attackmagic"));
         attackMagic.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");
 
         //Item Button
-        item.setGraphic(imageItem);//Set Button Image
+        item.setGraphic(Loader.ImageLoader("item"));//Set Button Image
         item.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button Formatting
         item.setOnAction(e -> window.setScene(items));//Lambda Action
 
         //Run Button
-        run.setGraphic(imageRun);//Set Button Image
+        run.setGraphic(Loader.ImageLoader("run"));//Set Button Image
         run.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button formatting
-        run.setOnAction(e -> Alerts.display("Warning!", imageRunAway, "RUN AWAY"));//Lambda Action
+        run.setOnAction(e -> Alerts.display("Warning!", Loader.ImageLoader("runaway"), "RUN AWAY"));//Lambda Action
 
         //Button Config End
 

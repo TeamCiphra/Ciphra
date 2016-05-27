@@ -66,6 +66,8 @@ public class Main extends Application{
                     coreGridPane.add(attackGrid, 0, 1);
                     coreGridPane.getChildren().remove(buttonGrid);
                     Button goBack = new Button("Go back");
+                    goBack.setMinHeight(46);
+                    goBack.setMinWidth(166);
                     coreGridPane.add(goBack, 1, 1);
                     coreGridPane.setHalignment(goBack, HPos.CENTER);
                     goBack.setOnAction(f -> {
@@ -175,6 +177,7 @@ public class Main extends Application{
         //New Back Button for Bag
         Button back = new Button("Go back");
         back.setOnAction(e -> window.setScene(mainScene));//Lambda Action
+
 
         //SP for new image
         StackPane itemBag = new StackPane();

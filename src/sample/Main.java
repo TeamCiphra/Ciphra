@@ -2,13 +2,12 @@ package sample;
 
 //Import
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -30,6 +29,9 @@ public class Main extends Application{
 
         //Title
         mainStage.setTitle("Game Desu.exe");
+
+        //StackPane
+        StackPane mainStackPane = new StackPane();
 
         //GridPanes
         GridPane sceneBattle = new GridPane();//Battle Scene GridPane
@@ -53,6 +55,9 @@ public class Main extends Application{
         Button attackMagic = new Button();//AttackMagic Button
         Button item = new Button();//Item Button
         Button run = new Button();//Run Button
+        Button start = new Button("Start");
+
+        mainStackPane.getChildren().addAll(Loader.ImageLoader("field"), start);
 
 
         //Button Configs Start
@@ -93,18 +98,27 @@ public class Main extends Application{
         //Item Button
         item.setGraphic(Loader.ImageLoader("item"));//Set Button Image
         item.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button Formatting
-        item.setOnAction(e -> window.setScene(items));//Lambda Action
+        item.setOnAction(e -> {
+            Button goBack = new Button("Go back");
+            ImageView bag = Loader.ImageLoader("item bag");
+            mainStackPane.getChildren().addAll(bag, goBack);
+            goBack.setOnAction(f -> mainStackPane.getChildren().removeAll(bag, goBack));
+        });//Lambda Action
 
         //Run Button
         run.setGraphic(Loader.ImageLoader("run"));//Set Button Image
         run.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button formatting
-        run.setOnAction(e -> Alerts.display("Warning!", Loader.ImageLoader("runaway"), "RUN AWAY"));//Lambda Action
+        run.setOnAction(e -> {
+            Alerts.display("Warning!", Loader.ImageLoader("runaway"), "RUN AWAY");
+            mainStackPane.getChildren().remove(coreGridPane);
+            mainStackPane.getChildren().add(start);
+        });//Lambda Action
 
         //Button Config End
 
         //GridPane Config Start
 
-//        coreGridPane.setGridLinesVisible(true);
+        coreGridPane.setGridLinesVisible(true);
         //Main GP Formatting
         coreGridPane.setVgap(5);
         coreGridPane.setHgap(5);
@@ -141,7 +155,7 @@ public class Main extends Application{
 
 
         //Attack Action Grid
-//        attackGrid.setGridLinesVisible(true);
+        attackGrid.setGridLinesVisible(true);
         attackGrid.setHgap(5);
         attackGrid.setPadding(GLOBAL_INSET);
         attackGrid.setAlignment(Pos.CENTER);
@@ -156,7 +170,7 @@ public class Main extends Application{
 
 
         //Main Button Grid
-//        buttonGrid.setGridLinesVisible(true);
+        buttonGrid.setGridLinesVisible(true);
         buttonGrid.setHgap(5);
         buttonGrid.setPadding(GLOBAL_INSET);
         buttonGrid.setAlignment(Pos.CENTER);
@@ -173,8 +187,13 @@ public class Main extends Application{
         //GridPane Config End
 
 
+        //StackPane Config
+        start.setOnAction(e -> {
+            mainStackPane.getChildren().remove(start);
+            mainStackPane.getChildren().add(coreGridPane);
+        });
         //Build Main
-        mainScene = new Scene(coreGridPane, 854, 480);
+        mainScene = new Scene(mainStackPane, 854, 480);
 
         //New Back Button for Bag
         Button back = new Button("Go back");

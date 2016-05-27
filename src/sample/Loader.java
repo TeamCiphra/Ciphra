@@ -14,6 +14,7 @@ public class Loader {
 
         //Item
         Image imageItem = new Image(Loader.class.getResourceAsStream("item.png"));
+        Image imageItemBag = new Image(Loader.class.getResourceAsStream("itembag.png"));
 
         //Run
         Image imageRun = new Image(Loader.class.getResourceAsStream("run.png"));
@@ -25,6 +26,9 @@ public class Loader {
 
         //Null
         Image imageNull = new Image(Loader.class.getResourceAsStream("null.png"));
+
+        //Field
+        Image imageField = new Image(Loader.class.getResourceAsStream("field.png"));
 
         if (imageName.equalsIgnoreCase("attackmelee")){
             return new ImageView(imageAttackMelee);
@@ -42,6 +46,14 @@ public class Loader {
             return new ImageView(imagePlayerOne);
         } else if(imageName.equalsIgnoreCase("playertwo")){
             return new ImageView(imagePlayerTwo);
+        } else if(imageName.equalsIgnoreCase("field")){
+            ImageView field = new ImageView(imageField);
+            field.setFitWidth(854);
+            field.setPreserveRatio(true);
+            return field;
+        } else if(imageName.equalsIgnoreCase("item bag")){
+            ImageView itemBag = new ImageView(imageItemBag);
+            return itemBag;
         } else{
             return new ImageView(imageNull);
         }

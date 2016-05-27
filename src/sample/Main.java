@@ -25,8 +25,6 @@ public class Main extends Application{
 
     @Override
     public void start(Stage mainStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-
         //Main Stage
         window = mainStage;
 
@@ -56,8 +54,8 @@ public class Main extends Application{
         Button item = new Button();//Item Button
         Button run = new Button();//Run Button
 
-        //Button Configs Start
 
+        //Button Configs Start
         //Attack Button
         attack.setGraphic(Loader.ImageLoader("attackmelee"));//Set Button Image
         attack.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button Formatting
@@ -66,8 +64,8 @@ public class Main extends Application{
                     coreGridPane.add(attackGrid, 0, 1);
                     coreGridPane.getChildren().remove(buttonGrid);
                     Button goBack = new Button("Go back");
-                    goBack.setMinHeight(46);
-                    goBack.setMinWidth(166);
+                    goBack.setMinHeight(36);
+                    goBack.setMinWidth(156);
                     coreGridPane.add(goBack, 1, 1);
                     coreGridPane.setHalignment(goBack, HPos.CENTER);
                     goBack.setOnAction(f -> {
@@ -83,12 +81,14 @@ public class Main extends Application{
         //Attack Melee
         attackMelee.setGraphic(Loader.ImageLoader("attackmelee"));
         attackMelee.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");
-        attackMelee.setMaxSize(327,Double.MAX_VALUE);
+        attackMelee.setMinWidth(329);
+
 
         //Attack Magic
         attackMagic.setGraphic(Loader.ImageLoader("attackmagic"));
         attackMagic.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");
-        attackMagic.setMaxSize(327, Double.MAX_VALUE);
+        attackMagic.setMinWidth(329);
+
 
         //Item Button
         item.setGraphic(Loader.ImageLoader("item"));//Set Button Image
@@ -104,7 +104,7 @@ public class Main extends Application{
 
         //GridPane Config Start
 
-        coreGridPane.setGridLinesVisible(true);
+//        coreGridPane.setGridLinesVisible(true);
         //Main GP Formatting
         coreGridPane.setVgap(5);
         coreGridPane.setHgap(5);
@@ -141,7 +141,7 @@ public class Main extends Application{
 
 
         //Attack Action Grid
-        attackGrid.setGridLinesVisible(true);
+//        attackGrid.setGridLinesVisible(true);
         attackGrid.setHgap(5);
         attackGrid.setPadding(GLOBAL_INSET);
         attackGrid.setAlignment(Pos.CENTER);
@@ -151,10 +151,12 @@ public class Main extends Application{
         attackGrid.getChildren().addAll(attackMelee, attackMagic);
         attackGrid.setHalignment(attackMelee, HPos.CENTER);
         attackGrid.setHalignment(attackMagic, HPos.CENTER);
+        attackGrid.getColumnConstraints().add(new ColumnConstraints(329));
+        attackGrid.getColumnConstraints().add(new ColumnConstraints(329));
 
 
         //Main Button Grid
-        buttonGrid.setGridLinesVisible(true);
+//        buttonGrid.setGridLinesVisible(true);
         buttonGrid.setHgap(5);
         buttonGrid.setPadding(GLOBAL_INSET);
         buttonGrid.setAlignment(Pos.CENTER);

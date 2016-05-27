@@ -55,8 +55,9 @@ public class Main extends Application{
         Button attackMagic = new Button();//AttackMagic Button
         Button item = new Button();//Item Button
         Button run = new Button();//Run Button
-        Button start = new Button("Start");
+        Button start = new Button("Start");//Start Battle
 
+        //Set StackPane with the field and start button
         mainStackPane.getChildren().addAll(Loader.ImageLoader("field"), start);
 
 
@@ -65,6 +66,7 @@ public class Main extends Application{
         attack.setGraphic(Loader.ImageLoader("attackmelee"));//Set Button Image
         attack.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button Formatting
         attack.setOnAction(e -> {
+                    //Button Scene Shift
                     coreGridPane.getChildren().remove(battlePrompt);
                     coreGridPane.add(attackGrid, 0, 1);
                     coreGridPane.getChildren().remove(buttonGrid);
@@ -73,6 +75,7 @@ public class Main extends Application{
                     goBack.setMinWidth(156);
                     coreGridPane.add(goBack, 1, 1);
                     coreGridPane.setHalignment(goBack, HPos.CENTER);
+                    //Reset
                     goBack.setOnAction(f -> {
                                 coreGridPane.getChildren().remove(attackGrid);
                                 coreGridPane.add(battlePrompt, 0, 1);
@@ -86,22 +89,24 @@ public class Main extends Application{
         //Attack Melee
         attackMelee.setGraphic(Loader.ImageLoader("attackmelee"));
         attackMelee.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");
-        attackMelee.setMinWidth(329);
+        attackMelee.setMinWidth(329);//Layout min
 
 
         //Attack Magic
         attackMagic.setGraphic(Loader.ImageLoader("attackmagic"));
         attackMagic.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");
-        attackMagic.setMinWidth(329);
+        attackMagic.setMinWidth(329);//Layout min
 
 
         //Item Button
         item.setGraphic(Loader.ImageLoader("item"));//Set Button Image
         item.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button Formatting
         item.setOnAction(e -> {
+            //Stack Pane for item overlay
             Button goBack = new Button("Go back");
             ImageView bag = Loader.ImageLoader("item bag");
             mainStackPane.getChildren().addAll(bag, goBack);
+            //Stack Pane fall back
             goBack.setOnAction(f -> mainStackPane.getChildren().removeAll(bag, goBack));
         });//Lambda Action
 
@@ -109,7 +114,9 @@ public class Main extends Application{
         run.setGraphic(Loader.ImageLoader("run"));//Set Button Image
         run.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button formatting
         run.setOnAction(e -> {
+            //Run Away Alert
             Alerts.display("Warning!", Loader.ImageLoader("runaway"), "RUN AWAY");
+            //Stack Pane full reset
             mainStackPane.getChildren().remove(coreGridPane);
             mainStackPane.getChildren().add(start);
         });//Lambda Action

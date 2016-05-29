@@ -2,17 +2,23 @@ package sample;
 
 //Import
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
+
 
 
 public class Main extends Application{
@@ -60,6 +66,12 @@ public class Main extends Application{
         //Set StackPane with the field and start button
         mainStackPane.getChildren().addAll(Loader.ImageLoader("field"), start);
 
+        //StackPane Config
+        start.setOnAction(e -> {
+            mainStackPane.getChildren().remove(start);
+            mainStackPane.getChildren().add(coreGridPane);
+        });
+
 
         //Button Configs Start
         //Attack Button
@@ -103,11 +115,36 @@ public class Main extends Application{
         item.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button Formatting
         item.setOnAction(e -> {
             //Stack Pane for item overlay
+
+            //TableView
+            TableView<ItemBag> itemBagTable;
+            //Table Column
+            TableColumn<ItemBag, String> itemNameColumn = new TableColumn<>("Item Name");
+            itemNameColumn.setMinWidth(200);
+            itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+            TableColumn<ItemBag, Integer> itemValueColumn = new TableColumn<>("Amount");
+            itemValueColumn.setMaxWidth(50);
+            itemValueColumn.setCellValueFactory(new PropertyValueFactory<>("itemAmount"));
+            //TableView Setup
+            itemBagTable = new TableView<>();
+            itemBagTable.setItems(getItemBag());
+            itemBagTable.setColumnResizePolicy();
+            itemBagTable.getColumns().addAll(itemNameColumn, itemValueColumn);
+
+            //Button
             Button goBack = new Button("Go back");
-            ImageView bag = Loader.ImageLoader("item bag");
-            mainStackPane.getChildren().addAll(bag, goBack);
+
+            //Item Bag Grid Pane
+            GridPane itemBagGridPane = new GridPane();
+            itemBagGridPane.setGridLinesVisible(true);
+            itemBagGridPane.setPadding(GLOBAL_INSET);
+            itemBagGridPane.setConstraints(itemBagTable, 0, 0);
+            itemBagGridPane.setConstraints(goBack, 1, 1);
+            itemBagGridPane.getChildren().addAll(itemBagTable,goBack);
+
+            mainStackPane.getChildren().add(itemBagGridPane);
             //Stack Pane fall back
-            goBack.setOnAction(f -> mainStackPane.getChildren().removeAll(bag, goBack));
+            goBack.setOnAction(f -> mainStackPane.getChildren().remove(itemBagGridPane));
         });//Lambda Action
 
         //Run Button
@@ -160,7 +197,6 @@ public class Main extends Application{
         sceneBattle.setHalignment(playerTwoWeapon, HPos.CENTER);
         sceneBattle.setHalignment(playerTwoSprite, HPos.CENTER);
 
-
         //Attack Action Grid
         attackGrid.setGridLinesVisible(true);
         attackGrid.setHgap(5);
@@ -174,7 +210,6 @@ public class Main extends Application{
         attackGrid.setHalignment(attackMagic, HPos.CENTER);
         attackGrid.getColumnConstraints().add(new ColumnConstraints(329));
         attackGrid.getColumnConstraints().add(new ColumnConstraints(329));
-
 
         //Main Button Grid
         buttonGrid.setGridLinesVisible(true);
@@ -194,11 +229,6 @@ public class Main extends Application{
         //GridPane Config End
 
 
-        //StackPane Config
-        start.setOnAction(e -> {
-            mainStackPane.getChildren().remove(start);
-            mainStackPane.getChildren().add(coreGridPane);
-        });
         //Build Main
         mainScene = new Scene(mainStackPane, 854, 480);
 
@@ -215,6 +245,15 @@ public class Main extends Application{
         window.setScene(mainScene);//Make the window Scene
         mainStage.setResizable(false);
         mainStage.show();//Show
+    }
+
+
+    public ObservableList<ItemBag> getItemBag(){
+        ObservableList<ItemBag> itemBag = FXCollections.observableArrayList();
+        itemBag.add(new ItemBag("Health Pot", 1337));
+        itemBag.add(new ItemBag("Energy Pot", 1337));
+        itemBag.add(new ItemBag("Sanic Pot", 1337));
+        return itemBag;
     }
 
     public static void main(String[]args){

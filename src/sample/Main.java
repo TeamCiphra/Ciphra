@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -125,10 +124,16 @@ public class Main extends Application{
             TableColumn<ItemBag, Integer> itemValueColumn = new TableColumn<>("Amount");
             itemValueColumn.setMaxWidth(50);
             itemValueColumn.setCellValueFactory(new PropertyValueFactory<>("itemAmount"));
+            //TableView Action
+            Button itemOne = new Button("Use");
+            itemOne.setOnAction(f -> {
+                itemValueColumn.setCellValueFactory(new PropertyValueFactory<>("itemAmount"));
+            });
+            Button itemTwo = new Button("Use");
+            Button itemThree = new Button("Use");
             //TableView Setup
             itemBagTable = new TableView<>();
             itemBagTable.setItems(getItemBag());
-            itemBagTable.setColumnResizePolicy();
             itemBagTable.getColumns().addAll(itemNameColumn, itemValueColumn);
 
             //Button
@@ -162,7 +167,7 @@ public class Main extends Application{
 
         //GridPane Config Start
 
-        coreGridPane.setGridLinesVisible(true);
+//        coreGridPane.setGridLinesVisible(true);
         //Main GP Formatting
         coreGridPane.setVgap(5);
         coreGridPane.setHgap(5);
@@ -198,7 +203,7 @@ public class Main extends Application{
         sceneBattle.setHalignment(playerTwoSprite, HPos.CENTER);
 
         //Attack Action Grid
-        attackGrid.setGridLinesVisible(true);
+//        attackGrid.setGridLinesVisible(true);
         attackGrid.setHgap(5);
         attackGrid.setPadding(GLOBAL_INSET);
         attackGrid.setAlignment(Pos.CENTER);
@@ -212,7 +217,7 @@ public class Main extends Application{
         attackGrid.getColumnConstraints().add(new ColumnConstraints(329));
 
         //Main Button Grid
-        buttonGrid.setGridLinesVisible(true);
+//        buttonGrid.setGridLinesVisible(true);
         buttonGrid.setHgap(5);
         buttonGrid.setPadding(GLOBAL_INSET);
         buttonGrid.setAlignment(Pos.CENTER);

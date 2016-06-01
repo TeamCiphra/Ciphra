@@ -15,6 +15,9 @@ public class Loader {
         //Item
         Image imageItem = new Image(Loader.class.getResourceAsStream("item.png"));
         Image imageItemBag = new Image(Loader.class.getResourceAsStream("itembag.png"));
+        Image imageHPPot = new Image(Loader.class.getResourceAsStream("HP_Pot.png"));
+        Image imageEnergyPot = new Image(Loader.class.getResourceAsStream("MP_Pot.png"));
+        Image imageAttackPot = new Image(Loader.class.getResourceAsStream("ATT_Pot.png"));
 
         //Run
         Image imageRun = new Image(Loader.class.getResourceAsStream("run.png"));
@@ -54,6 +57,12 @@ public class Loader {
         } else if(imageName.equalsIgnoreCase("item bag")){
             ImageView itemBag = new ImageView(imageItemBag);
             return itemBag;
+        } else if(imageName.equalsIgnoreCase("hp_pot")){
+            return new ImageView(imageHPPot);
+        } else if(imageName.equalsIgnoreCase("mp_pot")){
+            return new ImageView(imageEnergyPot);
+        } else if(imageName.equalsIgnoreCase("attack_pot")){
+            return new ImageView(imageAttackPot);
         } else{
             return new ImageView(imageNull);
         }

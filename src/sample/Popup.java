@@ -11,9 +11,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
-public class Alerts {
+public class Popup {
 
-    public static void display(String title, ImageView picture, String message){
+    public static void alert(String title, ImageView picture, String message){
         Stage window = new Stage();
 
         window.initModality(Modality.APPLICATION_MODAL);
@@ -41,10 +41,8 @@ public class Alerts {
         Grid.setHalignment(labelText, HPos.CENTER);
         Grid.setHalignment(closeButton, HPos.CENTER);
 
-
         Scene scene = new Scene(Grid);
         window.setScene(scene);
         window.showAndWait();
-
     }
 }

@@ -2,16 +2,11 @@ package sample;
 
 //Import
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -112,52 +107,14 @@ public class Main extends Application{
         //Item Button
         item.setGraphic(Loader.ImageLoader("item"));//Set Button Image
         item.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button Formatting
-        item.setOnAction(e -> {
-            //Stack Pane for item overlay
-
-            //TableView
-            TableView<ItemBag> itemBagTable;
-            //Table Column
-            TableColumn<ItemBag, String> itemNameColumn = new TableColumn<>("Item Name");
-            itemNameColumn.setMinWidth(200);
-            itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
-            TableColumn<ItemBag, Integer> itemValueColumn = new TableColumn<>("Amount");
-            itemValueColumn.setMaxWidth(50);
-            itemValueColumn.setCellValueFactory(new PropertyValueFactory<>("itemAmount"));
-            //TableView Action
-            Button itemOne = new Button("Use");
-            itemOne.setOnAction(f -> {
-                itemValueColumn.setCellValueFactory(new PropertyValueFactory<>("itemAmount"));
-            });
-            Button itemTwo = new Button("Use");
-            Button itemThree = new Button("Use");
-            //TableView Setup
-            itemBagTable = new TableView<>();
-            itemBagTable.setItems(getItemBag());
-            itemBagTable.getColumns().addAll(itemNameColumn, itemValueColumn);
-
-            //Button
-            Button goBack = new Button("Go back");
-
-            //Item Bag Grid Pane
-            GridPane itemBagGridPane = new GridPane();
-            itemBagGridPane.setGridLinesVisible(true);
-            itemBagGridPane.setPadding(GLOBAL_INSET);
-            itemBagGridPane.setConstraints(itemBagTable, 0, 0);
-            itemBagGridPane.setConstraints(goBack, 1, 1);
-            itemBagGridPane.getChildren().addAll(itemBagTable,goBack);
-
-            mainStackPane.getChildren().add(itemBagGridPane);
-            //Stack Pane fall back
-            goBack.setOnAction(f -> mainStackPane.getChildren().remove(itemBagGridPane));
-        });//Lambda Action
+        item.setOnAction(e -> ItemBag.display());//Lambda Action
 
         //Run Button
         run.setGraphic(Loader.ImageLoader("run"));//Set Button Image
         run.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button formatting
         run.setOnAction(e -> {
             //Run Away Alert
-            Alerts.display("Warning!", Loader.ImageLoader("runaway"), "RUN AWAY");
+            Popup.alert("Warning!", Loader.ImageLoader("runaway"), "RUN AWAY");
             //Stack Pane full reset
             mainStackPane.getChildren().remove(coreGridPane);
             mainStackPane.getChildren().add(start);
@@ -250,15 +207,6 @@ public class Main extends Application{
         window.setScene(mainScene);//Make the window Scene
         mainStage.setResizable(false);
         mainStage.show();//Show
-    }
-
-
-    public ObservableList<ItemBag> getItemBag(){
-        ObservableList<ItemBag> itemBag = FXCollections.observableArrayList();
-        itemBag.add(new ItemBag("Health Pot", 1337));
-        itemBag.add(new ItemBag("Energy Pot", 1337));
-        itemBag.add(new ItemBag("Sanic Pot", 1337));
-        return itemBag;
     }
 
     public static void main(String[]args){

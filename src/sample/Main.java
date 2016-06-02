@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 
+import java.util.HashMap;
 
 
 public class Main extends Application{
@@ -21,6 +22,7 @@ public class Main extends Application{
     Stage window;
     Scene mainScene, items;
     final Insets GLOBAL_INSET = new Insets(5, 5, 5, 5);
+    private HashMap playerStats = new HashMap();
 
     @Override
     public void start(Stage mainStage) throws Exception{
@@ -62,6 +64,10 @@ public class Main extends Application{
 
         //StackPane Config
         start.setOnAction(e -> {
+            playerStats.clear();
+            playerStats.put("HP_Pot_Amount", 1337);
+            playerStats.put("Energy_Pot_Amount", 1337);
+            playerStats.put("ATT_Pot_Amount", 1337);
             mainStackPane.getChildren().remove(start);
             mainStackPane.getChildren().add(coreGridPane);
         });
@@ -107,7 +113,7 @@ public class Main extends Application{
         //Item Button
         item.setGraphic(Loader.ImageLoader("item"));//Set Button Image
         item.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button Formatting
-        item.setOnAction(e -> ItemBag.display());//Lambda Action
+        item.setOnAction(e -> playerStats = ItemBag.display(playerStats, mainStage));//Lambda Action
 
         //Run Button
         run.setGraphic(Loader.ImageLoader("run"));//Set Button Image
@@ -122,9 +128,9 @@ public class Main extends Application{
 
         //Button Config End
 
+
         //GridPane Config Start
 
-//        coreGridPane.setGridLinesVisible(true);
         //Main GP Formatting
         coreGridPane.setVgap(5);
         coreGridPane.setHgap(5);
@@ -160,7 +166,6 @@ public class Main extends Application{
         sceneBattle.setHalignment(playerTwoSprite, HPos.CENTER);
 
         //Attack Action Grid
-//        attackGrid.setGridLinesVisible(true);
         attackGrid.setHgap(5);
         attackGrid.setPadding(GLOBAL_INSET);
         attackGrid.setAlignment(Pos.CENTER);
@@ -174,7 +179,6 @@ public class Main extends Application{
         attackGrid.getColumnConstraints().add(new ColumnConstraints(329));
 
         //Main Button Grid
-//        buttonGrid.setGridLinesVisible(true);
         buttonGrid.setHgap(5);
         buttonGrid.setPadding(GLOBAL_INSET);
         buttonGrid.setAlignment(Pos.CENTER);
@@ -197,7 +201,6 @@ public class Main extends Application{
         //New Back Button for Bag
         Button back = new Button("Go back");
         back.setOnAction(e -> window.setScene(mainScene));//Lambda Action
-
 
         //SP for new image
         StackPane itemBag = new StackPane();

@@ -183,7 +183,7 @@ public class Main extends Application{
         sceneBattle.setConstraints(playerTwoWeapon, 2, 0);
         sceneBattle.setConstraints(playerTwoSprite, 3, 0);
         //Battle Scene Add Elements
-        sceneBattle.getChildren().addAll(playerOneWeapon, health, playerTwoWeapon, playerTwoSprite);
+        sceneBattle.getChildren().addAll(playerOneSprite, health, playerOneWeapon, playerTwoWeapon, playerTwoSprite);
         sceneBattle.setHalignment(playerOneSprite, HPos.CENTER);
         sceneBattle.setValignment(health, VPos.BOTTOM);
         sceneBattle.setHalignment(playerOneWeapon, HPos.CENTER);

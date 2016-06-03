@@ -22,7 +22,7 @@ public class Main extends Application{
     Stage window;
     Scene mainScene, items;
     final Insets GLOBAL_INSET = new Insets(5, 5, 5, 5);
-    private HashMap playerStats = new HashMap();
+    private HashMap gameStats = new HashMap();
 
     @Override
     public void start(Stage mainStage) throws Exception{
@@ -64,10 +64,10 @@ public class Main extends Application{
 
         //StackPane Config
         start.setOnAction(e -> {
-            playerStats.clear();
-            playerStats.put("HP_Pot_Amount", 1337);
-            playerStats.put("Energy_Pot_Amount", 1337);
-            playerStats.put("ATT_Pot_Amount", 1337);
+            gameStats.clear();
+            gameStats.put("HP_Pot_Amount", 1337);
+            gameStats.put("Energy_Pot_Amount", 1337);
+            gameStats.put("ATT_Pot_Amount", 1337);
             mainStackPane.getChildren().remove(start);
             mainStackPane.getChildren().add(coreGridPane);
         });
@@ -113,7 +113,7 @@ public class Main extends Application{
         //Item Button
         item.setGraphic(Loader.ImageLoader("item"));//Set Button Image
         item.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button Formatting
-        item.setOnAction(e -> playerStats = ItemBag.display(playerStats, mainStage));//Lambda Action
+        item.setOnAction(e -> gameStats = ItemBag.display(gameStats, mainStage));//Lambda Action
 
         //Run Button
         run.setGraphic(Loader.ImageLoader("run"));//Set Button Image

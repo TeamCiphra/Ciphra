@@ -84,14 +84,14 @@ public class Main extends Application{
 
         //Better Health Bar
 
-        String RED_BAR = "red-bar";
-        String YELLOW_BAR = "yellow-bar";
-        String ORANGE_BAR = "orange-bar";
-        String GREEN_BAR  = "green-bar";
-        ProgressBar playerHP = new ProgressBar();
-        int HPLevel = (int)gameStats.get("player_HP");
-        Label HPLabel = new Label();
-
+//        String RED_BAR = "red-bar";
+//        String YELLOW_BAR = "yellow-bar";
+//        String ORANGE_BAR = "orange-bar";
+//        String GREEN_BAR  = "green-bar";
+//        ProgressBar playerHP = new ProgressBar();
+//        int HPLevel = (int)gameStats.get("player_HP");
+//        Label HPLabel = new Label();
+//
 
 
         //Button Configs Start
@@ -142,6 +142,7 @@ public class Main extends Application{
         run.setOnAction(e -> {
             //Run Away Alert
             Popup.alert("Warning!", Loader.ImageLoader("runaway"), "RUN AWAY");
+            playerTwoSprite.setGraphic(Loader.ImageLoader("playertwo"));
             //Stack Pane full reset
             mainStackPane.getChildren().remove(coreGridPane);
             mainStackPane.getChildren().add(start);
@@ -176,14 +177,14 @@ public class Main extends Application{
         sceneBattle.setHgap(5);
         sceneBattle.setPadding(GLOBAL_INSET);
 //        sceneBattle.setConstraints(playerOneSprite, 0, 0);
-        sceneBattle.setConstraints(HPLabel, 0, 0);
+//        sceneBattle.setConstraints(HPLabel, 0, 0);
         sceneBattle.setConstraints(playerOneWeapon, 1, 0);
         sceneBattle.setConstraints(playerTwoWeapon, 2, 0);
         sceneBattle.setConstraints(playerTwoSprite, 3, 0);
         //Battle Scene Add Elements
-        sceneBattle.getChildren().addAll(HPLabel ,playerOneWeapon, playerTwoWeapon, playerTwoSprite);
+        sceneBattle.getChildren().addAll(playerOneSprite, playerOneWeapon, playerTwoWeapon, playerTwoSprite);
         sceneBattle.setHalignment(playerOneSprite, HPos.CENTER);
-        sceneBattle.setValignment(HPLabel, VPos.BOTTOM);
+//        sceneBattle.setValignment(HPLabel, VPos.BOTTOM);
         sceneBattle.setHalignment(playerOneWeapon, HPos.CENTER);
         sceneBattle.setHalignment(playerTwoWeapon, HPos.CENTER);
         sceneBattle.setHalignment(playerTwoSprite, HPos.CENTER);

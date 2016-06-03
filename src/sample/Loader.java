@@ -50,12 +50,12 @@ public class Loader {
         } else if(imageName.equalsIgnoreCase("playerone")){
             return new ImageView(imagePlayerOne);
         } else if(imageName.equalsIgnoreCase("playertwo")){
-            Random generator = new Random();
-            if(((int) (Math.random()) *2) == 1){
+            if((int)(Math.random() * 2) == 0){
                 return new ImageView(imagePlayerTwo);
-
-            }else if(((int) (Math.random()) *2) == 0){
+            }else if((int)(Math.random() * 2) == 1){
                 return new ImageView(imagePlayerThree);
+            }else if((int) (Math.random() * 2) == 2) {
+                
             }else{
                 return new ImageView(imageNull);
             }

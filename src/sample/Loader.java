@@ -24,8 +24,8 @@ public class Loader {
         Image imageRunAway = new Image(Loader.class.getResourceAsStream("runaway.jpg"));
 
         //Player
-        Image imagePlayerOne = new Image(Loader.class.getResourceAsStream("playerone.jpg"));
-        Image imagePlayerTwo = new Image(Loader.class.getResourceAsStream("playertwo.jpg"));
+        Image imagePlayerOne = new Image(Loader.class.getResourceAsStream("playerone.png"));
+        Image imagePlayerTwo = new Image(Loader.class.getResourceAsStream("playertwo.gif"));
 
         //Null
         Image imageNull = new Image(Loader.class.getResourceAsStream("null.png"));

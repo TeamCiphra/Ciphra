@@ -77,6 +77,7 @@ public class ItemBag {
                 Player_HP = 100;
             }
             gameStats.put("HP_Pot_Amount", itemHPPot.getItemAmount());
+            gameStats.put("Player_HP", Player_HP);
             itemHPPotLabel.setText(itemHPPot.getItemName() + " x" + itemHPPot.getItemAmount());
         });
         Button itemEnergyPotButton = new Button();

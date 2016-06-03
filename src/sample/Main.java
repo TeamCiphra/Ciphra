@@ -9,6 +9,8 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.image.Image;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -26,6 +28,7 @@ public class Main extends Application{
     Scene mainScene, items;
     final Insets GLOBAL_INSET = new Insets(5, 5, 5, 5);
     private HashMap gameStats = new HashMap();
+    int randomHP;
 
     @Override
     public void start(Stage mainStage) throws Exception{
@@ -68,7 +71,7 @@ public class Main extends Application{
         //StackPane Config
         start.setOnAction(e -> {
             gameStats.clear();
-            gameStats.put("Player_HP", 100);
+            gameStats.put("Player_HP", 50);
             gameStats.put("Player_Energy", 100);
             gameStats.put("Player_Attack", 10);
             gameStats.put("Enemy_HP", 200);
@@ -107,6 +110,15 @@ public class Main extends Application{
                     );
                 }
         );//Lambda Action
+
+
+
+        Label health = new Label("You: ");
+        health.setContentDisplay(ContentDisplay.TOP);
+        health.setWrapText(true);
+        health.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");
+        health.setOnMouseEntered(e -> health.setText((int)gameStats.get("Player_HP") + "/50"));
+        health.setOnMouseExited(e -> health.setText("You: "));
 
         //Attack Melee
         attackMelee.setGraphic(Loader.ImageLoader("attackmelee"));
@@ -166,14 +178,14 @@ public class Main extends Application{
         sceneBattle.setHgap(5);
         sceneBattle.setPadding(GLOBAL_INSET);
         sceneBattle.setConstraints(playerOneSprite, 0, 0);
-        sceneBattle.setConstraints(HPLabel, 0, 0);
+        sceneBattle.setConstraints(health, 0, 0);
         sceneBattle.setConstraints(playerOneWeapon, 1, 0);
         sceneBattle.setConstraints(playerTwoWeapon, 2, 0);
         sceneBattle.setConstraints(playerTwoSprite, 3, 0);
         //Battle Scene Add Elements
-        sceneBattle.getChildren().addAll(playerOneWeapon, playerTwoWeapon, playerTwoSprite);
+        sceneBattle.getChildren().addAll(playerOneWeapon, health, playerTwoWeapon, playerTwoSprite);
         sceneBattle.setHalignment(playerOneSprite, HPos.CENTER);
-        sceneBattle.setValignment(HPLabel, VPos.BOTTOM);
+        sceneBattle.setValignment(health, VPos.BOTTOM);
         sceneBattle.setHalignment(playerOneWeapon, HPos.CENTER);
         sceneBattle.setHalignment(playerTwoWeapon, HPos.CENTER);
         sceneBattle.setHalignment(playerTwoSprite, HPos.CENTER);

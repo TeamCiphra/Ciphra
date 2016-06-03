@@ -54,10 +54,8 @@ public class Loader {
                 return new ImageView(imagePlayerTwo);
             }else if((int)(Math.random() * 2) == 1){
                 return new ImageView(imagePlayerThree);
-            }else if((int) (Math.random() * 2) == 2) {
-                
             }else{
-                return new ImageView(imageNull);
+                return new ImageView(imagePlayerTwo);
             }
         } else if(imageName.equalsIgnoreCase("field")){
             ImageView field = new ImageView(imageField);

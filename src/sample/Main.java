@@ -67,6 +67,7 @@ public class Main extends Application{
         //StackPane Config
         start.setOnAction(e -> {
             gameStats.clear();
+
             gameStats.put("Player_HP", 100);
             gameStats.put("Player_Energy", 100);
             gameStats.put("Player_Attack", 10);

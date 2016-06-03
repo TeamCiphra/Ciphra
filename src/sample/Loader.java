@@ -3,6 +3,7 @@ package sample;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.util.Random;
 
 public class Loader {
 
@@ -26,13 +27,14 @@ public class Loader {
         //Player
         Image imagePlayerOne = new Image(Loader.class.getResourceAsStream("playerone.png"));
         Image imagePlayerTwo = new Image(Loader.class.getResourceAsStream("playertwo.gif"));
+        Image imagePlayerThree = new Image(Loader.class.getResourceAsStream("playerthree.gif"));
 
         //Null
         Image imageNull = new Image(Loader.class.getResourceAsStream("null.png"));
 
         //Field
         Image imageField = new Image(Loader.class.getResourceAsStream("field.png"));
-
+        String x = "playertwo";
         if (imageName.equalsIgnoreCase("attackmelee")){
             return new ImageView(imageAttackMelee);
         } else if(imageName.equalsIgnoreCase("attackmagic")){
@@ -48,7 +50,15 @@ public class Loader {
         } else if(imageName.equalsIgnoreCase("playerone")){
             return new ImageView(imagePlayerOne);
         } else if(imageName.equalsIgnoreCase("playertwo")){
-            return new ImageView(imagePlayerTwo);
+            Random generator = new Random();
+            if(((int) (Math.random()) *2) == 1){
+                return new ImageView(imagePlayerTwo);
+
+            }else if(((int) (Math.random()) *2) == 0){
+                return new ImageView(imagePlayerThree);
+            }else{
+                return new ImageView(imageNull);
+            }
         } else if(imageName.equalsIgnoreCase("field")){
             ImageView field = new ImageView(imageField);
             field.setFitWidth(854);

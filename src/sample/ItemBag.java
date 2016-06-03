@@ -15,7 +15,7 @@ public class ItemBag {
     //Instance Variables
     private String itemName;
     private int itemAmount;
-    static int HP_Amount, Energy_Amount, ATT_Amount;
+    static int HP_Amount, Energy_Amount, ATT_Amount, Player_HP;
 
     public ItemBag(){
         itemName = "";
@@ -41,7 +41,7 @@ public class ItemBag {
         this.itemAmount = itemAmount;
     }
 
-    public static HashMap display(HashMap playerStats, Stage parentStage){
+    public static HashMap display(HashMap gameStats, Stage parentStage){
         Stage window = new Stage();
 
         window.initModality(Modality.APPLICATION_MODAL);
@@ -52,9 +52,10 @@ public class ItemBag {
         window.setMaxHeight(250);
 
         //Move to local
-        HP_Amount = (int)playerStats.get("HP_Pot_Amount");
-        Energy_Amount = (int)playerStats.get("Energy_Pot_Amount");
-        ATT_Amount = (int)playerStats.get("ATT_Pot_Amount");
+        HP_Amount = (int)gameStats.get("HP_Pot_Amount");
+        Energy_Amount = (int)gameStats.get("Energy_Pot_Amount");
+        ATT_Amount = (int)gameStats.get("ATT_Pot_Amount");
+        Player_HP = (int)gameStats.get("Player_HP");
 
         //Items
         ItemBag itemHPPot = new ItemBag("HP Pot", HP_Amount);
@@ -71,21 +72,25 @@ public class ItemBag {
         itemHPPotButton.setGraphic(Loader.ImageLoader("hp_pot"));
         itemHPPotButton.setOnAction(e -> {
             itemHPPot.setItemAmount(itemHPPot.getItemAmount() - 1);
-            playerStats.put("HP_Pot_Amount", itemHPPot.getItemAmount());
+            Player_HP += 20;
+            if (Player_HP > 100){
+                Player_HP = 100;
+            }
+            gameStats.put("HP_Pot_Amount", itemHPPot.getItemAmount());
             itemHPPotLabel.setText(itemHPPot.getItemName() + " x" + itemHPPot.getItemAmount());
         });
         Button itemEnergyPotButton = new Button();
         itemEnergyPotButton.setGraphic(Loader.ImageLoader("mp_pot"));
         itemEnergyPotButton.setOnAction(e -> {
             itemEnergyPot.setItemAmount(itemEnergyPot.getItemAmount() - 1);
-            playerStats.put("Energy_Pot_Amount", itemEnergyPot.getItemAmount());
+            gameStats.put("Energy_Pot_Amount", itemEnergyPot.getItemAmount());
             itemEnergyPotLabel.setText(itemEnergyPot.getItemName() + " x" + itemEnergyPot.getItemAmount());
         });
         Button itemATTPotButton = new Button();
         itemATTPotButton.setGraphic(Loader.ImageLoader("attack_pot"));
         itemATTPotButton.setOnAction(e -> {
             itemATTPot.setItemAmount(itemATTPot.getItemAmount() - 1);
-            playerStats.put("ATT_Pot_Amount", itemATTPot.getItemAmount());
+            gameStats.put("ATT_Pot_Amount", itemATTPot.getItemAmount());
             itemATTPotLabel.setText(itemATTPot.getItemName() + " x" + itemATTPot.getItemAmount());
         });
         Button goBack = new Button("Go Back");
@@ -133,7 +138,7 @@ public class ItemBag {
         window.setScene(bag);
         window.show();
         
-        return playerStats;
+        return gameStats;
     }
 }
 

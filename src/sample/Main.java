@@ -5,14 +5,16 @@ import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
-
+import javafx.beans.property.IntegerProperty;
 import java.util.HashMap;
 
 
@@ -22,7 +24,7 @@ public class Main extends Application{
     Stage window;
     Scene mainScene, items;
     final Insets GLOBAL_INSET = new Insets(5, 5, 5, 5);
-    private HashMap playerStats = new HashMap();
+    private HashMap gameStats = new HashMap();
 
     @Override
     public void start(Stage mainStage) throws Exception{
@@ -64,13 +66,31 @@ public class Main extends Application{
 
         //StackPane Config
         start.setOnAction(e -> {
-            playerStats.clear();
-            playerStats.put("HP_Pot_Amount", 1337);
-            playerStats.put("Energy_Pot_Amount", 1337);
-            playerStats.put("ATT_Pot_Amount", 1337);
+            gameStats.clear();
+            gameStats.put("Player_HP", 100);
+            gameStats.put("Player_Energy", 100);
+            gameStats.put("Player_Attack", 10);
+            gameStats.put("Enemy_HP", 200);
+            gameStats.put("Enemy_Attack", 5);
+            gameStats.put("HP_Pot_Amount", 10);
+            gameStats.put("Energy_Pot_Amount", 10);
+            gameStats.put("ATT_Pot_Amount", 10);
+            gameStats.put("Dev_Pot", 1337);
             mainStackPane.getChildren().remove(start);
             mainStackPane.getChildren().add(coreGridPane);
         });
+
+
+        //Better Health Bar
+
+        String RED_BAR = "red-bar";
+        String YELLOW_BAR = "yellow-bar";
+        String ORANGE_BAR = "orange-bar";
+        String GREEN_BAR  = "green-bar";
+        ProgressBar playerHP = new ProgressBar();
+        int HPLevel = (int)gameStats.get("player_HP");
+        Label HPLabel = new Label();
+
 
 
         //Button Configs Start
@@ -113,7 +133,7 @@ public class Main extends Application{
         //Item Button
         item.setGraphic(Loader.ImageLoader("item"));//Set Button Image
         item.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");//Button Formatting
-        item.setOnAction(e -> playerStats = ItemBag.display(playerStats, mainStage));//Lambda Action
+        item.setOnAction(e -> gameStats = ItemBag.display(gameStats, mainStage));//Lambda Action
 
         //Run Button
         run.setGraphic(Loader.ImageLoader("run"));//Set Button Image
@@ -154,13 +174,15 @@ public class Main extends Application{
         //Battle Scene
         sceneBattle.setHgap(5);
         sceneBattle.setPadding(GLOBAL_INSET);
-        sceneBattle.setConstraints(playerOneSprite, 0, 0);
+//        sceneBattle.setConstraints(playerOneSprite, 0, 0);
+        sceneBattle.setConstraints(HPLabel, 0, 0);
         sceneBattle.setConstraints(playerOneWeapon, 1, 0);
         sceneBattle.setConstraints(playerTwoWeapon, 2, 0);
         sceneBattle.setConstraints(playerTwoSprite, 3, 0);
         //Battle Scene Add Elements
-        sceneBattle.getChildren().addAll(playerOneSprite, playerOneWeapon, playerTwoWeapon, playerTwoSprite);
+        sceneBattle.getChildren().addAll(HPLabel ,playerOneWeapon, playerTwoWeapon, playerTwoSprite);
         sceneBattle.setHalignment(playerOneSprite, HPos.CENTER);
+        sceneBattle.setValignment(HPLabel, VPos.BOTTOM);
         sceneBattle.setHalignment(playerOneWeapon, HPos.CENTER);
         sceneBattle.setHalignment(playerTwoWeapon, HPos.CENTER);
         sceneBattle.setHalignment(playerTwoSprite, HPos.CENTER);
@@ -195,17 +217,12 @@ public class Main extends Application{
         //GridPane Config End
 
 
+
+
         //Build Main
         mainScene = new Scene(mainStackPane, 854, 480);
 
-        //New Back Button for Bag
-        Button back = new Button("Go back");
-        back.setOnAction(e -> window.setScene(mainScene));//Lambda Action
 
-        //SP for new image
-        StackPane itemBag = new StackPane();
-        itemBag.getChildren().add(back);
-        items = new Scene(itemBag,854, 480);
 
         window.setScene(mainScene);//Make the window Scene
         mainStage.setResizable(false);

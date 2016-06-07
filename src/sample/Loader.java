@@ -34,7 +34,8 @@ public class Loader {
 
         //Field
         Image imageField = new Image(Loader.class.getResourceAsStream("field.png"));
-        String x = "playertwo";
+
+        //Image Switch
         if (imageName.equalsIgnoreCase("attackmelee")){
             return new ImageView(imageAttackMelee);
         } else if(imageName.equalsIgnoreCase("attackmagic")){
@@ -50,6 +51,7 @@ public class Loader {
         } else if(imageName.equalsIgnoreCase("playerone")){
             return new ImageView(imagePlayerOne);
         } else if(imageName.equalsIgnoreCase("playertwo")){
+            //randomly generated monsters
             if((int)(Math.random() * 2) == 0){
                 return new ImageView(imagePlayerTwo);
             }else if((int)(Math.random() * 2) == 1){
@@ -72,6 +74,7 @@ public class Loader {
         } else if(imageName.equalsIgnoreCase("attack_pot")){
             return new ImageView(imageAttackPot);
         } else{
+            //return null for errors
             return new ImageView(imageNull);
         }
     }

@@ -43,7 +43,7 @@ public class ItemBag {
 
     public static HashMap display(HashMap gameStats, Stage parentStage){
         Stage window = new Stage();
-
+        //set dimension
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Item Bag");
         window.setMinWidth(250);
@@ -71,6 +71,8 @@ public class ItemBag {
         Button itemHPPotButton = new Button();
         itemHPPotButton.setGraphic(Loader.ImageLoader("hp_pot"));
         itemHPPotButton.setOnAction(e -> {
+            //increase health when pressed
+            //stop increase when health is full
             itemHPPot.setItemAmount(itemHPPot.getItemAmount() - 1);
             Player_HP += 20;
             if (Player_HP > 100){
@@ -83,6 +85,7 @@ public class ItemBag {
         Button itemEnergyPotButton = new Button();
         itemEnergyPotButton.setGraphic(Loader.ImageLoader("mp_pot"));
         itemEnergyPotButton.setOnAction(e -> {
+            //subtract item amount on click
             itemEnergyPot.setItemAmount(itemEnergyPot.getItemAmount() - 1);
             gameStats.put("Energy_Pot_Amount", itemEnergyPot.getItemAmount());
             itemEnergyPotLabel.setText(itemEnergyPot.getItemName() + " x" + itemEnergyPot.getItemAmount());
@@ -90,6 +93,7 @@ public class ItemBag {
         Button itemATTPotButton = new Button();
         itemATTPotButton.setGraphic(Loader.ImageLoader("attack_pot"));
         itemATTPotButton.setOnAction(e -> {
+            //subtract item amount on click
             itemATTPot.setItemAmount(itemATTPot.getItemAmount() - 1);
             gameStats.put("ATT_Pot_Amount", itemATTPot.getItemAmount());
             itemATTPotLabel.setText(itemATTPot.getItemName() + " x" + itemATTPot.getItemAmount());
@@ -134,6 +138,7 @@ public class ItemBag {
         itemBagScrollPane.setContent(itemBag);
 
         Scene bag = new Scene(itemBagScrollPane);
+        //set dimensions
         window.setX(parentStage.getX() + 900);
         window.setY(parentStage.getY() + 100);
         window.setScene(bag);

@@ -51,9 +51,12 @@ public class Main extends Application{
         //Labels
         Label playerOneSprite = new Label();
         playerOneSprite.setGraphic(Loader.ImageLoader("playerone"));
+        //weapon placeholder
         Label playerOneWeapon = new Label("This is player One's weapon");
+
         Label playerTwoSprite = new Label();
         playerTwoSprite.setGraphic(Loader.ImageLoader("playertwo"));
+        //weapon placeholder
         Label playerTwoWeapon = new Label("This is player Two's weapon");
         Label battlePrompt = new Label("Please choose an option.");
 
@@ -71,11 +74,14 @@ public class Main extends Application{
         //StackPane Config
         start.setOnAction(e -> {
             gameStats.clear();
+            //set stats
             gameStats.put("Player_HP", 50);
             gameStats.put("Player_Energy", 100);
             gameStats.put("Player_Attack", 10);
+            //set enemy stats
             gameStats.put("Enemy_HP", 200);
             gameStats.put("Enemy_Attack", 5);
+            //set item amount
             gameStats.put("HP_Pot_Amount", 10);
             gameStats.put("Energy_Pot_Amount", 10);
             gameStats.put("ATT_Pot_Amount", 10);
@@ -96,6 +102,7 @@ public class Main extends Application{
                     coreGridPane.add(attackGrid, 0, 1);
                     coreGridPane.getChildren().remove(buttonGrid);
                     Button goBack = new Button("Go back");
+                    //configure button dimension
                     goBack.setMinHeight(36);
                     goBack.setMinWidth(156);
                     coreGridPane.add(goBack, 1, 1);
@@ -112,11 +119,12 @@ public class Main extends Application{
         );//Lambda Action
 
 
-
+        //battle scene integration
         Label health = new Label("You: ");
         health.setContentDisplay(ContentDisplay.TOP);
         health.setWrapText(true);
         health.setStyle("-fx-base: #8080ff; -fx-focus-color: transparent");
+        //modified variable health based on items
         health.setOnMouseEntered(e -> health.setText((int)gameStats.get("Player_HP") + "/50"));
         health.setOnMouseExited(e -> health.setText("You: "));
 
@@ -143,6 +151,7 @@ public class Main extends Application{
         run.setOnAction(e -> {
             //Run Away Alert
             Popup.alert("Warning!", Loader.ImageLoader("runaway"), "RUN AWAY");
+            // sprite 2 randomly generated
             playerTwoSprite.setGraphic(Loader.ImageLoader("playertwo"));
             //Stack Pane full reset
             mainStackPane.getChildren().remove(coreGridPane);
@@ -177,6 +186,7 @@ public class Main extends Application{
         //Battle Scene
         sceneBattle.setHgap(5);
         sceneBattle.setPadding(GLOBAL_INSET);
+        //place sprites and weapons in different cells
         sceneBattle.setConstraints(playerOneSprite, 0, 0);
         sceneBattle.setConstraints(health, 0, 0);
         sceneBattle.setConstraints(playerOneWeapon, 1, 0);
@@ -184,11 +194,11 @@ public class Main extends Application{
         sceneBattle.setConstraints(playerTwoSprite, 3, 0);
         //Battle Scene Add Elements
         sceneBattle.getChildren().addAll(playerOneWeapon, health, playerTwoWeapon, playerTwoSprite);
-        sceneBattle.setHalignment(playerOneSprite, HPos.CENTER);
-        sceneBattle.setValignment(health, VPos.BOTTOM);
+        sceneBattle.setHalignment(playerOneSprite, HPos.CENTER);//center sprite 1
+        sceneBattle.setValignment(health, VPos.BOTTOM);// place health at bottom
         sceneBattle.setHalignment(playerOneWeapon, HPos.CENTER);
         sceneBattle.setHalignment(playerTwoWeapon, HPos.CENTER);
-        sceneBattle.setHalignment(playerTwoSprite, HPos.CENTER);
+        sceneBattle.setHalignment(playerTwoSprite, HPos.CENTER);//center sprite 2
 
         //Attack Action Grid
         attackGrid.setHgap(5);
@@ -228,7 +238,7 @@ public class Main extends Application{
 
 
         window.setScene(mainScene);//Make the window Scene
-        mainStage.setResizable(false);
+        mainStage.setResizable(false);// make window un-resizable
         mainStage.show();//Show
     }
 

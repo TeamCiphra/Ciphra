@@ -193,15 +193,9 @@ public class Main extends Application{
         sceneBattle.setConstraints(playerTwoWeapon, 2, 0);
         sceneBattle.setConstraints(playerTwoSprite, 3, 0);
         //Battle Scene Add Elements
-<<<<<<< HEAD
-        sceneBattle.getChildren().addAll(playerOneWeapon, health, playerTwoWeapon, playerTwoSprite);
-        sceneBattle.setHalignment(playerOneSprite, HPos.CENTER);//center sprite 1
-        sceneBattle.setValignment(health, VPos.BOTTOM);// place health at bottom
-=======
         sceneBattle.getChildren().addAll(playerOneSprite, health, playerOneWeapon, playerTwoWeapon, playerTwoSprite);
         sceneBattle.setHalignment(playerOneSprite, HPos.CENTER);
         sceneBattle.setValignment(health, VPos.BOTTOM);
->>>>>>> origin/layout-and-items
         sceneBattle.setHalignment(playerOneWeapon, HPos.CENTER);
         sceneBattle.setHalignment(playerTwoWeapon, HPos.CENTER);
         sceneBattle.setHalignment(playerTwoSprite, HPos.CENTER);//center sprite 2
@@ -251,5 +245,7 @@ public class Main extends Application{
     public static void main(String[]args){
         launch(args);
     }
+
+
 
 }

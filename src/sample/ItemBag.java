@@ -15,7 +15,7 @@ public class ItemBag {
     //Instance Variables
     private String itemName;
     private int itemAmount;
-    static int HP_Amount, Energy_Amount, ATT_Amount, Player_HP;
+    static int amountHPPot, amountEnergyPot, amountATTPot, playerHP;
 
     public ItemBag(){
         itemName = "";
@@ -52,15 +52,15 @@ public class ItemBag {
         window.setMaxHeight(250);
 
         //Move to local
-        HP_Amount = (int)gameStats.get("HP_Pot_Amount");
-        Energy_Amount = (int)gameStats.get("Energy_Pot_Amount");
-        ATT_Amount = (int)gameStats.get("ATT_Pot_Amount");
-        Player_HP = (int)gameStats.get("Player_HP");
+        amountHPPot = (int)gameStats.get("amountHPPot");
+        amountEnergyPot = (int)gameStats.get("amountEnergyPot");
+        amountATTPot = (int)gameStats.get("amountATTPot");
+        playerHP = (int)gameStats.get("playerHP");
 
         //Items
-        ItemBag itemHPPot = new ItemBag("HP Pot", HP_Amount);
-        ItemBag itemEnergyPot = new ItemBag("Energy Pot", Energy_Amount);
-        ItemBag itemATTPot = new ItemBag("Damage Pot", ATT_Amount);
+        ItemBag itemHPPot = new ItemBag("HP Pot", amountHPPot);
+        ItemBag itemEnergyPot = new ItemBag("Energy Pot", amountEnergyPot);
+        ItemBag itemATTPot = new ItemBag("Attack Pot", amountATTPot);
 
         //Labels
         Label itemHPPotLabel = new Label(itemHPPot.getItemName() + " x" + itemHPPot.getItemAmount());
@@ -74,12 +74,12 @@ public class ItemBag {
             //increase health when pressed
             //stop increase when health is full
             itemHPPot.setItemAmount(itemHPPot.getItemAmount() - 1);
-            Player_HP += 20;
-            if (Player_HP > 100){
-                Player_HP = 100;
+            playerHP += 20;
+            if (playerHP > 100){
+                playerHP = 100;
             }
-            gameStats.put("HP_Pot_Amount", itemHPPot.getItemAmount());
-            gameStats.put("Player_HP", Player_HP);
+            gameStats.put("amountHPPot", itemHPPot.getItemAmount());
+            gameStats.put("playerHP", playerHP);
             itemHPPotLabel.setText(itemHPPot.getItemName() + " x" + itemHPPot.getItemAmount());
         });
         Button itemEnergyPotButton = new Button();
@@ -87,7 +87,7 @@ public class ItemBag {
         itemEnergyPotButton.setOnAction(e -> {
             //subtract item amount on click
             itemEnergyPot.setItemAmount(itemEnergyPot.getItemAmount() - 1);
-            gameStats.put("Energy_Pot_Amount", itemEnergyPot.getItemAmount());
+            gameStats.put("amountEnergyPot", itemEnergyPot.getItemAmount());
             itemEnergyPotLabel.setText(itemEnergyPot.getItemName() + " x" + itemEnergyPot.getItemAmount());
         });
         Button itemATTPotButton = new Button();
@@ -95,7 +95,7 @@ public class ItemBag {
         itemATTPotButton.setOnAction(e -> {
             //subtract item amount on click
             itemATTPot.setItemAmount(itemATTPot.getItemAmount() - 1);
-            gameStats.put("ATT_Pot_Amount", itemATTPot.getItemAmount());
+            gameStats.put("amountATTPot", itemATTPot.getItemAmount());
             itemATTPotLabel.setText(itemATTPot.getItemName() + " x" + itemATTPot.getItemAmount());
         });
         Button goBack = new Button("Go Back");

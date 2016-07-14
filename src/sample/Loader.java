@@ -7,6 +7,9 @@ import java.util.Random;
 
 public class Loader {
 
+    //Null
+    static Image imageNull = new Image(Loader.class.getResourceAsStream("null.png"));
+
     public static ImageView ImageLoader(String imageName){
         //Attack
         Image imageAttackMelee = new Image(Loader.class.getResourceAsStream("attackMelee.png"));
@@ -24,18 +27,12 @@ public class Loader {
         Image imageRun = new Image(Loader.class.getResourceAsStream("run.png"));
         Image imageRunAway = new Image(Loader.class.getResourceAsStream("runaway.jpg"));
 
-        //Player
-        Image imagePlayerOne = new Image(Loader.class.getResourceAsStream("playerone.png"));
-        Image imagePlayerTwo = new Image(Loader.class.getResourceAsStream("playertwo.gif"));
-        Image imagePlayerThree = new Image(Loader.class.getResourceAsStream("playerthree.gif"));
-
-        //Null
-        Image imageNull = new Image(Loader.class.getResourceAsStream("null.png"));
 
         //Field
         Image imageField = new Image(Loader.class.getResourceAsStream("field.png"));
 
         //Image Switch
+        //Need to rewrite as case switch
         if (imageName.equalsIgnoreCase("attackmelee")){
             return new ImageView(imageAttackMelee);
         } else if(imageName.equalsIgnoreCase("attackmagic")){
@@ -48,17 +45,6 @@ public class Loader {
             return new ImageView(imageRun);
         } else if(imageName.equalsIgnoreCase("runaway")){
             return new ImageView(imageRunAway);
-        } else if(imageName.equalsIgnoreCase("playerone")){
-            return new ImageView(imagePlayerOne);
-        } else if(imageName.equalsIgnoreCase("playertwo")){
-            //randomly generated monsters
-            if((int)(Math.random() * 2) == 0){
-                return new ImageView(imagePlayerTwo);
-            }else if((int)(Math.random() * 2) == 1){
-                return new ImageView(imagePlayerThree);
-            }else{
-                return new ImageView(imagePlayerTwo);
-            }
         } else if(imageName.equalsIgnoreCase("field")){
             ImageView field = new ImageView(imageField);
             field.setFitWidth(854);
@@ -75,6 +61,30 @@ public class Loader {
             return new ImageView(imageAttackPot);
         } else{
             //return null for errors
+            return new ImageView(imageNull);
+        }
+    }
+
+    public static ImageView PlayerLoader(String playerName){
+
+        //Player
+        Image imagePlayerOne = new Image(Loader.class.getResourceAsStream("playerone.png"));
+        Image imagePlayerTwo = new Image(Loader.class.getResourceAsStream("playertwo.gif"));
+        Image imagePlayerThree = new Image(Loader.class.getResourceAsStream("playerthree.gif"));
+
+        int playertwoRandomInt = new Random().nextInt(1) + 1;
+
+        if (playerName.equalsIgnoreCase("playerone")){
+            return new ImageView(imagePlayerOne);
+        } else if(playerName.equalsIgnoreCase("playertwo")){
+            if (playertwoRandomInt == 0){
+                return new ImageView(imagePlayerTwo);
+            } else if (playertwoRandomInt == 1){
+                return new ImageView(imagePlayerThree);
+            } else{
+                return new ImageView(imageNull);
+            }
+        } else{
             return new ImageView(imageNull);
         }
     }

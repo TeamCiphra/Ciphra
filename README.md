@@ -30,3 +30,4 @@ easily manage the items within 'Loader'.
 Sprite recreation.  Added new sprite for HP Pot.  Enemy gifs will be ?removed? and replace with something more size appropriate.  Will also start working on ?animations?
 Also IDK how to get back to 'Main' from run away in 'Battle'.  This will be worked on but I'm thinking that we might have the battle open in a new window like items do.
 Remap the gridpane and how the button, lables, health bars, and sprites fit onto the window.  More like PKM battles, Fire Emblem, or creating something oursleves.
+
